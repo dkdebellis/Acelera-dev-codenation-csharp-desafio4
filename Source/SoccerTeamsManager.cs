@@ -8,7 +8,7 @@ namespace Codenation.Challenge
     public class SoccerTeamsManager : IManageSoccerTeams
     {
 
-        public List<Teams> allTimes = new List<Teams>();
+        public List<Teams> allTeams = new List<Teams>();
         public List<Players> allPlayers = new List<Players>();
         public List<Captain> cap = new List<Captain>();
 
@@ -18,7 +18,7 @@ namespace Codenation.Challenge
 
         public bool IsThereATeam (long teamId)
         {
-            return allTimes.Any(x => x.Id == teamId);
+            return allTeams.Any(x => x.Id == teamId);
         }
 
         public bool IsThereAPlayer (long playerId)
@@ -31,7 +31,7 @@ namespace Codenation.Challenge
             if (IsThereATeam(id))
                 throw new UniqueIdentifierException();
 
-            allTimes.Add(new Teams
+            allTeams.Add(new Teams
             {
                 Id = id,
                 Name = name,
@@ -115,7 +115,7 @@ namespace Codenation.Challenge
             if (!IsThereATeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allTimes
+            return allTeams
                 .Where(x => x.Id == teamId)
                 .Select(x => x.Name)
                 .FirstOrDefault().ToString();
@@ -161,7 +161,7 @@ namespace Codenation.Challenge
 
         public List<long> GetTeams()
         {
-            return allTimes
+            return allTeams
                 .OrderBy(x => x.Id)
                 .Select(x => x.Id)
                 .ToList();
@@ -206,16 +206,16 @@ namespace Codenation.Challenge
             if (!IsThereATeam(teamId) || !IsThereATeam(visitorTeamId))
                 throw new TeamNotFoundException();
 
-            string home = allTimes.Where(x => x.Id == teamId).Select(x => x.MainUniform).FirstOrDefault();
-            string visitant = allTimes.Where(x => x.Id == visitorTeamId).Select(x => x.MainUniform).FirstOrDefault();
+            string home = allTeams.Where(x => x.Id == teamId).Select(x => x.MainUniform).FirstOrDefault();
+            string visitant = allTeams.Where(x => x.Id == visitorTeamId).Select(x => x.MainUniform).FirstOrDefault();
 
             if (home == visitant)
-                return allTimes
+                return allTeams
                     .Where(x => x.Id == visitorTeamId)
                     .Select(x => x.SecondaryUniform)
                     .FirstOrDefault();
 
-            return allTimes
+            return allTeams
                     .Where(x => x.Id == visitorTeamId)
                     .Select(x => x.MainUniform)
                     .FirstOrDefault();
