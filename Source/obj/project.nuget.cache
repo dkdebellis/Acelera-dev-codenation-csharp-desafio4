@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "GfQFbOBB1DXjsOzea7XwtFIhau+tSm8ZdHsHZdeVOyieHz4ntL1hTBPZOdRc5dLfw1DGXhqiQAJb8g/JxFBzBw==",
+  "success": true,
+  "projectFilePath": "/Users/pedrodebellis/codenation/csharp-1/Source/Source.csproj",
+  "expectedPackageFiles": [
+    "/Users/pedrodebellis/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "/Users/pedrodebellis/.nuget/packages/netstandard.library/2.0.3/netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

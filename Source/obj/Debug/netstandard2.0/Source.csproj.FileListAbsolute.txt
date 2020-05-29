@@ -1,0 +1,9 @@
+/Users/pedrodebellis/codenation/csharp-1/Source/bin/Debug/netstandard2.0/Source.deps.json
+/Users/pedrodebellis/codenation/csharp-1/Source/bin/Debug/netstandard2.0/Source.dll
+/Users/pedrodebellis/codenation/csharp-1/Source/bin/Debug/netstandard2.0/Source.pdb
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.csprojAssemblyReference.cache
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.csproj.CoreCompileInputs.cache
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.AssemblyInfoInputs.cache
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.AssemblyInfo.cs
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.dll
+/Users/pedrodebellis/codenation/csharp-1/Source/obj/Debug/netstandard2.0/Source.pdb
