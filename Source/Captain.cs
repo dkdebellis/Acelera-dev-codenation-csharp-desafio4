@@ -4,8 +4,8 @@ namespace Codenation.Challenge
 {
     public class Captain
     {
-        public long playerId { get; set; }
+        public long PlayerId { get; set; }
 
-        public long teamId { get; set; }
+        public long TeamId { get; set; }
     }
 }

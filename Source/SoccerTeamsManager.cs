@@ -8,30 +8,24 @@ namespace Codenation.Challenge
     public class SoccerTeamsManager : IManageSoccerTeams
     {
 
-        public List<Teams> allTeams = new List<Teams>();
-        public List<Players> allPlayers = new List<Players>();
-        public List<Captain> cap = new List<Captain>();
+        public List<Teams> AllTeams = new List<Teams>();
+        public List<Players> AllPlayers = new List<Players>();
+        public List<Captain> Cap = new List<Captain>();
 
         public SoccerTeamsManager()
         {
         }
 
-        public bool IsThereATeam (long teamId)
-        {
-            return allTeams.Any(x => x.Id == teamId);
-        }
-
-        public bool IsThereAPlayer (long playerId)
-        {
-            return allPlayers.Any(x => x.Id == playerId);
-        }
-
+        public bool ValidateTeam (long teamId) => AllTeams.Any(x => x.Id == teamId);
+        
+        public bool ValidadePlayer (long playerId) => AllPlayers.Any(x => x.Id == playerId);
+        
         public void AddTeam(long id, string name, DateTime createDate, string mainShirtColor, string secondaryShirtColor)
         {
-            if (IsThereATeam(id))
+            if (ValidateTeam(id))
                 throw new UniqueIdentifierException();
 
-            allTeams.Add(new Teams
+            AllTeams.Add(new Teams
             {
                 Id = id,
                 Name = name,
@@ -44,13 +38,13 @@ namespace Codenation.Challenge
 
         public void AddPlayer(long id, long teamId, string name, DateTime birthDate, int skillLevel, decimal salary)
         {
-            if (IsThereAPlayer(id))
+            if (ValidadePlayer(id))
                 throw new UniqueIdentifierException();
 
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            allPlayers.Add(new Players
+            AllPlayers.Add(new Players
             {
                 Id = id,
                 TeamId = teamId,
@@ -65,46 +59,46 @@ namespace Codenation.Challenge
         public void SetCaptain(long playerId)
         {
 
-            if (!IsThereAPlayer(playerId))
+            if (!ValidadePlayer(playerId))
                 throw new PlayerNotFoundException();
 
-            long idteam = allPlayers
+            long IdTeam = AllPlayers
                 .Where(x => x.Id == playerId)
                 .Select(x => x.TeamId)
                 .FirstOrDefault();
 
-            Captain capexiste = cap.FirstOrDefault(x => x.teamId == idteam);
+            Captain CapExist = Cap.FirstOrDefault(x => x.TeamId == IdTeam);
 
-            if (capexiste != null)
-                cap.Remove(capexiste);
+            if (CapExist != null)
+                Cap.Remove(CapExist);
 
-            cap.Add(new Captain
+            Cap.Add(new Captain
             {
-                playerId = playerId,
-                teamId = idteam
+                PlayerId = playerId,
+                TeamId = IdTeam
 
             });
         }
 
         public long GetTeamCaptain(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            Captain capexiste = cap.FirstOrDefault(x => x.teamId == teamId);
+            Captain CapExist = Cap.FirstOrDefault(x => x.TeamId == teamId);
 
-            if (capexiste == null)
+            if (CapExist == null)
                 throw new CaptainNotFoundException();
 
-            return capexiste.playerId;
+            return CapExist.PlayerId;
         }
 
         public string GetPlayerName(long playerId)
         {
-            if (!IsThereAPlayer(playerId))
+            if (!ValidadePlayer(playerId))
                 throw new PlayerNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .Where(x => x.Id == playerId)
                 .Select(x => x.Name)
                 .FirstOrDefault().ToString();
@@ -112,10 +106,10 @@ namespace Codenation.Challenge
 
         public string GetTeamName(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allTeams
+            return AllTeams
                 .Where(x => x.Id == teamId)
                 .Select(x => x.Name)
                 .FirstOrDefault().ToString();
@@ -123,10 +117,10 @@ namespace Codenation.Challenge
 
         public List<long> GetTeamPlayers(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .OrderBy(x => x.Id)
                 .Where(x => x.TeamId == teamId)
                 .Select(x => x.Id)
@@ -135,10 +129,10 @@ namespace Codenation.Challenge
 
         public long GetBestTeamPlayer(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .OrderByDescending(x => x.SkillLevel)
                 .ThenBy(x => x.Id)
                 .Where(x => x.TeamId == teamId)
@@ -148,10 +142,10 @@ namespace Codenation.Challenge
 
         public long GetOlderTeamPlayer(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .OrderBy(x => x.BirthDate)
                 .ThenBy(x => x.Id)
                 .Where(x => x.TeamId == teamId)
@@ -161,7 +155,7 @@ namespace Codenation.Challenge
 
         public List<long> GetTeams()
         {
-            return allTeams
+            return AllTeams
                 .OrderBy(x => x.Id)
                 .Select(x => x.Id)
                 .ToList();
@@ -169,10 +163,10 @@ namespace Codenation.Challenge
 
         public long GetHigherSalaryPlayer(long teamId)
         {
-            if (!IsThereATeam(teamId))
+            if (!ValidateTeam(teamId))
                 throw new TeamNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .OrderByDescending(x => x.Salary)
                 .ThenBy(x => x.Id)
                 .Where(x => x.TeamId == teamId)
@@ -182,10 +176,10 @@ namespace Codenation.Challenge
 
         public decimal GetPlayerSalary(long playerId)
         {
-            if (!IsThereAPlayer(playerId))
+            if (!ValidadePlayer(playerId))
                 throw new PlayerNotFoundException();
 
-            return allPlayers
+            return AllPlayers
                 .Where(x => x.Id == playerId)
                 .Select(x => x.Salary)
                 .FirstOrDefault();
@@ -193,7 +187,7 @@ namespace Codenation.Challenge
 
         public List<long> GetTopPlayers(int top)
         {
-            return allPlayers
+            return AllPlayers
                 .OrderByDescending(x => x.SkillLevel)
                 .ThenBy(x => x.Id)
                 .Select(x => x.Id)
@@ -203,22 +197,29 @@ namespace Codenation.Challenge
 
         public string GetVisitorShirtColor(long teamId, long visitorTeamId)
         {
-            if (!IsThereATeam(teamId) || !IsThereATeam(visitorTeamId))
+            if (!ValidateTeam(teamId) || !ValidateTeam(visitorTeamId))
                 throw new TeamNotFoundException();
 
-            string home = allTeams.Where(x => x.Id == teamId).Select(x => x.MainUniform).FirstOrDefault();
-            string visitant = allTeams.Where(x => x.Id == visitorTeamId).Select(x => x.MainUniform).FirstOrDefault();
+            string HomeUniform =
+                AllTeams
+                .Where(x => x.Id == teamId)
+                .Select(x => x.MainUniform)
+                .FirstOrDefault();
 
-            if (home == visitant)
-                return allTeams
+            string VisitantUniform =
+                AllTeams
+                .Where(x => x.Id == visitorTeamId)
+                .Select(x => x.MainUniform)
+                .FirstOrDefault();
+
+            if (HomeUniform == VisitantUniform)
+                return AllTeams
                     .Where(x => x.Id == visitorTeamId)
                     .Select(x => x.SecondaryUniform)
                     .FirstOrDefault();
 
-            return allTeams
-                    .Where(x => x.Id == visitorTeamId)
-                    .Select(x => x.MainUniform)
-                    .FirstOrDefault();
+            return VisitantUniform;
         }
     }
 }
+

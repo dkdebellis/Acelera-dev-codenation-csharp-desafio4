@@ -1,23 +1,23 @@
 ﻿<Properties StartupConfiguration="{9A94A827-7770-419B-9963-A94C177BB607}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Source/Teams.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Source/SoccerTeamsManager.cs">
     <Files>
       <File FileName="Source/IManageSoccerTeams.cs" Line="5" Column="1" />
-      <File FileName="Source/SoccerTeamsManager.cs" Line="15" Column="1" />
+      <File FileName="Source/SoccerTeamsManager.cs" Line="235" Column="1" />
       <File FileName="Source/Exceptions/CaptainNotFoundException.cs" />
       <File FileName="Source/Exceptions/PlayerNotFoundException.cs" />
       <File FileName="Source/Exceptions/TeamNotFoundException.cs" />
       <File FileName="Source/Exceptions/UniqueIdentifierException.cs" />
       <File FileName="Source.Test/SoccerTeamsManagerTest.cs" />
-      <File FileName="Source/PLayers.cs" Line="5" Column="1" />
-      <File FileName="Source/Captain.cs" Line="12" Column="1" />
-      <File FileName="Source/Teams.cs" Line="4" Column="13" />
+      <File FileName="Source/PLayers.cs" />
+      <File FileName="Source/Captain.cs" />
+      <File FileName="Source/Teams.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Challenge" expanded="True">
             <Node name="Source" expanded="True">
-              <Node name="Teams.cs" selected="True" />
+              <Node name="SoccerTeamsManager.cs" selected="True" />
             </Node>
             <Node name="Source.Test" expanded="True" />
           </Node>
